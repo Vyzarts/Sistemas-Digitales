@@ -16,8 +16,8 @@ public class Tarea1_binario {
                 System.out.println("dame El numero binario: ");
                 int binario = Sc.nextInt();
 
-                Decimal(binario);
-                Hexadecimal(binario);
+                DecimalB(binario);
+                HexadecimalB(binario);
 
                 break;
 
@@ -26,18 +26,18 @@ public class Tarea1_binario {
                 System.out.println("dame El numero Decimal: ");
                 int decimal = Sc.nextInt();
 
-                Binario(decimal);
-                Hexadecimal(decimal);
+                BinarioD(decimal);
+                HexadecimalD(decimal);
 
                 break;
 
             case 3:
 
                 System.out.println("dame El numero Hexadecimal: ");
-                int Hexadecimal = Sc.nextInt();
+                String Hexadecimal = Sc.nextLine();
 
-                Binario(Hexadecimal);
-                Decimal(Hexadecimal);
+                BinarioH(Hexadecimal);
+                DecimalH(Hexadecimal);
 
                 break;
 
@@ -47,52 +47,103 @@ public class Tarea1_binario {
         Sc.close();
     }
 
-    private static void Binario(int numero) {
+    private static void DecimalB(int numero) {
+        /**
+         * binario a decimal
+         * agarramos el numero de derecha a izquierda, a cada uno lo multiplicamos por
+         * 2**(n) donde por cada nuevo numero n = n +1
+         **/
+        int posicion = 0;
+        int SumaTotal = 0;
+        int NumeroOR = numero;
 
-        String resultado = "" ;
+        while (numero > 0) {
+            int UltDig = numero % 10;
+
+            int cuadrado = (int) Math.pow(2, posicion);
+            posicion = posicion + 1;
+
+            int mult = UltDig * cuadrado;
+
+            SumaTotal += mult;
+
+            numero = numero / 10;
+        }
+        System.out.println("El numero " + NumeroOR + " en decimal es " + SumaTotal);
+    }
+
+    // hexadecimal a binario
+    private static void BinarioH(String NumHex) {
+        // 2D
+        int num = 0;
+        String resultado = "";
+        String Total = "";
+        String BancoHexa = "0123456789ABCDEF";
+
+        while (num < NumHex.length()) {
+            int posicionBIN = resultado.length();
+
+            char posicionHEX = NumHex.charAt(num);
+            // decimal a binario
+            if (posicionHEX <= 9) {
+                int Dec = posicionHEX;
+
+                if (Dec % 2 == 0) {
+                    resultado = 0 + resultado;
+                } else {
+                    resultado = 1 + resultado;
+                }
+            } else {
+                int Letras = BancoHexa.indexOf(posicionHEX); // me esta devolviendo la posicion de la letra dada
+                                                             // (posicionHex) en el BancoHexa
+                int LetraBin = Letras;
+
+                if (LetraBin % 2 == 0) {
+                    resultado = 0 + resultado;
+                } else {
+                    resultado = 1 + resultado;
+                }
+                if (posicionBIN < 4 && posicionBIN > 2) {
+                    resultado = "0" + resultado;
+                } else if (posicionBIN < 3) {
+                    resultado = "00" + resultado;
+                }
+                posicionBIN++;
+            }
+            Total = resultado + Total;
+            num = num + 1;
+        }
+    }
+
+    private static void BinarioD(int numero) {
+
+        String resultado = "";
 
         int numeroOR = numero;
 
-        while(numero > 0){
-            
-            if(numero % 2 == 0){
+        while (numero > 0) {
+
+            if (numero % 2 == 0) {
                 resultado = 0 + resultado;
-            }else{
+            } else {
                 resultado = 1 + resultado;
             }
             numero = numero / 2;
         }
-        System.out.println("el "+numeroOR+" en binario es: "+ resultado);
+        System.out.println("el " + numeroOR + " en binario es: " + resultado);
     }
 
-    private static void Decimal(int numero) {
-            // Convertir de decimal a binario y hexadecimal
-            /**decimal a binario
-             * agarramos el numero de derecha a izquierda, a cada uno lo multiplicamos por 2**(n) donde por cada nuevo numero n = n +1**/
+    private static void HexadecimalD(int numero) {
+
         String resultado = "";
-            //0001
-            int residuo = numero % 10;
-            int posicion = 0;
 
-        while(numero > 0){
-            
-        }
-
-
-    }
-
-    private static void Hexadecimal(int numero) {
-        
-        String resultado = "";
-        
         int numeroOR = numero;
 
+        while (numero > 0) {
 
-        while(numero > 0){
-            
             int sobrante = (numero % 16);
 
-            if(sobrante >= 10){
+            if (sobrante >= 10) {
 
                 switch (sobrante) {
                     case 10:
@@ -117,14 +168,23 @@ public class Tarea1_binario {
                         break;
                 }
 
-            }else{
+            } else {
 
                 resultado = sobrante + resultado;
 
             }
-            numero = numero / 16;  
+            numero = numero / 16;
         }
-            System.out.println("el "+ numeroOR +" en hexadecimal es: " + resultado); 
+        System.out.println("el " + numeroOR + " en hexadecimal es: " + resultado);
 
     }
+
+    private static void HexadecimalB(int numero) {
+
+    }
+
+    private static void DecimalH(String numero) {
+
+    }
+
 }
