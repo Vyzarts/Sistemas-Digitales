@@ -34,6 +34,7 @@ public class Tarea1_binario {
             case 3:
 
                 System.out.println("dame El numero Hexadecimal: ");
+                String Buffer = Sc.nextLine();
                 String Hexadecimal = Sc.nextLine();
 
                 BinarioH(Hexadecimal);
@@ -76,43 +77,38 @@ public class Tarea1_binario {
     private static void BinarioH(String NumHex) {
         // 2D
         int num = 0;
-        String resultado = "";
         String Total = "";
         String BancoHexa = "0123456789ABCDEF";
 
         while (num < NumHex.length()) {
-            int posicionBIN = resultado.length();
-
             char posicionHEX = NumHex.charAt(num);
             // decimal a binario
-            if (posicionHEX <= 9) {
-                int Dec = posicionHEX;
+            String resultado = "";
+            int LetraBin = BancoHexa.indexOf(posicionHEX);
 
-                if (Dec % 2 == 0) {
-                    resultado = 0 + resultado;
-                } else {
-                    resultado = 1 + resultado;
-                }
-            } else {
-                int Letras = BancoHexa.indexOf(posicionHEX); // me esta devolviendo la posicion de la letra dada
-                                                             // (posicionHex) en el BancoHexa
-                int LetraBin = Letras;
+            while (LetraBin > 0) {
 
                 if (LetraBin % 2 == 0) {
                     resultado = 0 + resultado;
                 } else {
                     resultado = 1 + resultado;
                 }
-                if (posicionBIN < 4 && posicionBIN > 2) {
-                    resultado = "0" + resultado;
-                } else if (posicionBIN < 3) {
-                    resultado = "00" + resultado;
-                }
-                posicionBIN++;
+                LetraBin = LetraBin / 2;
             }
-            Total = resultado + Total;
+            int posicionBIN = resultado.length();
+
+            if (posicionBIN < 4 && posicionBIN > 2) {
+                resultado = "0" + resultado;
+            } else if (posicionBIN < 3) {
+                resultado = "00" + resultado;
+            }
+
+            Total += resultado;
             num = num + 1;
+
         }
+
+        System.out.println("el numero " + NumHex + " en hexadecimal es: " + Total);
     }
 
     private static void BinarioD(int numero) {
