@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 public class Tarea1_binario {
@@ -48,6 +49,8 @@ public class Tarea1_binario {
         Sc.close();
     }
 
+    // CASO 1
+    // binario a decimal
     private static void DecimalB(int numero) {
         /**
          * binario a decimal
@@ -73,44 +76,13 @@ public class Tarea1_binario {
         System.out.println("El numero " + NumeroOR + " en decimal es " + SumaTotal);
     }
 
-    // hexadecimal a binario
-    private static void BinarioH(String NumHex) {
-        // 2D
-        int num = 0;
-        String Total = "";
-        String BancoHexa = "0123456789ABCDEF";
+    // binario a hexadecimal
+    private static void HexadecimalB(int numero) {
 
-        while (num < NumHex.length()) {
-            char posicionHEX = NumHex.charAt(num);
-            // decimal a binario
-            String resultado = "";
-            int LetraBin = BancoHexa.indexOf(posicionHEX);
-
-            while (LetraBin > 0) {
-
-                if (LetraBin % 2 == 0) {
-                    resultado = 0 + resultado;
-                } else {
-                    resultado = 1 + resultado;
-                }
-                LetraBin = LetraBin / 2;
-            }
-            int posicionBIN = resultado.length();
-
-            if (posicionBIN < 4 && posicionBIN > 2) {
-                resultado = "0" + resultado;
-            } else if (posicionBIN < 3) {
-                resultado = "00" + resultado;
-            }
-
-            Total += resultado;
-            num = num + 1;
-
-        }
-
-        System.out.println("el numero " + NumHex + " en hexadecimal es: " + Total);
     }
 
+    // CASO 2
+    // decimal a binario
     private static void BinarioD(int numero) {
 
         String resultado = "";
@@ -129,6 +101,7 @@ public class Tarea1_binario {
         System.out.println("el " + numeroOR + " en binario es: " + resultado);
     }
 
+    // decimal a hexadecimal
     private static void HexadecimalD(int numero) {
 
         String resultado = "";
@@ -175,12 +148,65 @@ public class Tarea1_binario {
 
     }
 
-    private static void HexadecimalB(int numero) {
+    // CASO 3
+    // hexadecimal a binario
+    private static void BinarioH(String NumHex) {
+        // 2D
+        int num = 0;
+        String Total = "";
+        String BancoHexa = "0123456789ABCDEF";
 
+        while (num < NumHex.length()) {
+            char posicionHEX = NumHex.charAt(num);
+            // decimal a binario
+            String resultado = "";
+            int LetraBin = BancoHexa.indexOf(posicionHEX);
+
+            while (LetraBin > 0) {
+
+                if (LetraBin % 2 == 0) {
+                    resultado = 0 + resultado;
+                } else {
+                    resultado = 1 + resultado;
+                }
+                LetraBin = LetraBin / 2;
+            }
+            int posicionBIN = resultado.length();
+
+            if (posicionBIN < 4 && posicionBIN > 2) {
+                resultado = "0" + resultado;
+            } else if (posicionBIN < 3) {
+                resultado = "00" + resultado;
+            }
+
+            Total += resultado;
+            num = num + 1;
+
+        }
+
+        System.out.println("el numero " + NumHex + " en hexadecimal es: " + Total);
     }
 
+    // hexadecimal a decimal
     private static void DecimalH(String numero) {
+        // 2D
+        int i = 0;
+        String BancoHEX = "0123456789ABCDEF";
+        int SumaTotal = 0;
 
+        while (i < numero.length() - 1) {
+
+            char Letra = numero.charAt(i); // le doy la posicion y me da la letra
+            int Posicion = BancoHEX.indexOf(Letra); // le doy la letra y me devuelve la posicion
+
+            int Expo = (int) Math.pow(16, i);
+
+            int Multi = Posicion * Expo;
+
+            SumaTotal += Multi;
+            i--;
+        }
+        System.out.println("El " + numero + " en decimal es " + SumaTotal);
     }
 
 }
