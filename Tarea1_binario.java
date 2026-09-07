@@ -50,7 +50,7 @@ public class Tarea1_binario {
     }
 
     // CASO 1
-    // binario a decimal
+    // binario a decimal ||
     private static void DecimalB(int numero) {
         /**
          * binario a decimal
@@ -78,11 +78,23 @@ public class Tarea1_binario {
 
     // binario a hexadecimal
     private static void HexadecimalB(int numero) {
+        //1011010
+        String BancoHEX = "0123456789ABCDEF";
+        int Ultdig = numero % 10000;
+
+
+        for(int i = 0 ; Ultdig >= 0; i += 0){
+
+            
+
+            Ultdig = Ultdig / 10000;
+
+        }
 
     }
 
     // CASO 2
-    // decimal a binario
+    // decimal a binario ||
     private static void BinarioD(int numero) {
 
         String resultado = "";
@@ -101,7 +113,7 @@ public class Tarea1_binario {
         System.out.println("el " + numeroOR + " en binario es: " + resultado);
     }
 
-    // decimal a hexadecimal
+    // decimal a hexadecimal ||
     private static void HexadecimalD(int numero) {
 
         String resultado = "";
@@ -149,7 +161,7 @@ public class Tarea1_binario {
     }
 
     // CASO 3
-    // hexadecimal a binario
+    // hexadecimal a binario ||
     private static void BinarioH(String NumHex) {
         // 2D
         int num = 0;
@@ -187,24 +199,24 @@ public class Tarea1_binario {
         System.out.println("el numero " + NumHex + " en hexadecimal es: " + Total);
     }
 
-    // hexadecimal a decimal
+    // hexadecimal a decimal ||
     private static void DecimalH(String numero) {
         // 2D
-        int i = 0;
+        int ultPos = numero.length() - 1;
         String BancoHEX = "0123456789ABCDEF";
         int SumaTotal = 0;
-
-        while (i < numero.length() - 1) {
-
-            char Letra = numero.charAt(i); // le doy la posicion y me da la letra
+        int ciclos = 0;
+        while (0 <= ultPos) {
+            char Letra = numero.charAt(ultPos); // le doy la posicion y me da la letra
             int Posicion = BancoHEX.indexOf(Letra); // le doy la letra y me devuelve la posicion
 
-            int Expo = (int) Math.pow(16, i);
+            int Expo = (int) Math.pow(16, ciclos);
 
             int Multi = Posicion * Expo;
 
             SumaTotal += Multi;
-            i--;
+            ultPos--;
+            ciclos += 1;
         }
         System.out.println("El " + numero + " en decimal es " + SumaTotal);
     }
